@@ -12,9 +12,9 @@ import com.zhengsr.emaildemo.mail.callback.IEmailSendListener;
 
 public class MainActivity extends AppCompatActivity implements IEmailSendListener {
     private static final String TAG = "MainActivity";
-    private static final String SEND_EMAIL = "ist456123@163.com";
-    private static final String TO_EMAIL = "15919916744@163.com";
-    private static final String PASSWORD = "ist123";
+    private static final String SEND_EMAIL = "xxx@163.com";
+    private static final String TO_EMAIL = "x@163.com";
+    private static final String PASSWORD = "xxx";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
