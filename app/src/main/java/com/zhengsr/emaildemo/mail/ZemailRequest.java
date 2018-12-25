@@ -116,7 +116,10 @@ public class ZemailRequest {
                 mimeMessage.setSubject(bean.subject);
                 mimeMessage.setSentDate(new Date());
                 mimeMessage.setContent(multipart);
-                Transport.send(mimeMessage, bean.fromAddr, bean.password);
+                Transport transport = session.getTransport("smtp");
+                transport.connect(host,bean.fromAddr,bean.password);
+                transport.sendMessage(mimeMessage,mimeMessage.getAllRecipients());
+              //  Transport.send(mimeMessage, bean.fromAddr, bean.password);
             } catch (Exception e) {
                 e.printStackTrace();
                 errorMsg = e.toString();
