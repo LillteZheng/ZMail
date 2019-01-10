@@ -2,7 +2,6 @@ package com.android.zemaillib;
 
 import android.os.AsyncTask;
 import android.text.TextUtils;
-import android.util.Log;
 
 import com.android.zemaillib.bean.ZEmailBean;
 
@@ -74,7 +73,6 @@ public class ZemailRequest {
                         port = "25";
                     }
                 }
-                Log.d(TAG, "zsr --> doInBackground: "+bean.isSSLverify+" "+host+" "+port);
                 Properties props = new Properties();
                 props.put("mail.smtp.host", host);
                 if (bean.isSSLverify) {
