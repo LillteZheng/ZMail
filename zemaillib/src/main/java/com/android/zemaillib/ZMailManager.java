@@ -1,9 +1,10 @@
-package com.zhengsr.emaildemo.mail;
+package com.android.zemaillib;
 
 import android.text.TextUtils;
 
-import com.zhengsr.emaildemo.mail.bean.ZEmailBean;
-import com.zhengsr.emaildemo.mail.callback.IEmailSendListener;
+import com.android.zemaillib.bean.ZEmailBean;
+import com.android.zemaillib.callback.IEmailSendListener;
+
 
 /**
  * Created by zhengshaorui
@@ -60,8 +61,22 @@ public class ZMailManager {
             return this;
         }
 
+
         public EmailConfig listener(IEmailSendListener listener){
             mZmailBean.listener = listener;
+            return this;
+        }
+        public EmailConfig host(String host){
+            mZmailBean.host = host;
+            return this;
+        }
+        public EmailConfig isSSLvertify(boolean isSSLvertify){
+            mZmailBean.isSSLverify = isSSLvertify;
+            return this;
+        }
+
+        public EmailConfig port(int port){
+            mZmailBean.port = port+"";
             return this;
         }
 
@@ -69,6 +84,8 @@ public class ZMailManager {
             new ZemailRequest(checkNull(mZmailBean));
             return this;
         }
+
+
 
         /**
          * 检查是否有空数据
@@ -92,7 +109,7 @@ public class ZMailManager {
                     bean.subject = "This is test email ";
                 }
                 if (TextUtils.isEmpty(bean.nickName)) {
-                    bean.nickName = "";
+                    bean.nickName = "test";
                 }
             }
             return bean;

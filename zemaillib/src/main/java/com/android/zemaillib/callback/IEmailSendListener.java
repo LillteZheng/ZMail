@@ -1,4 +1,4 @@
-package com.zhengsr.emaildemo.mail.callback;
+package com.android.zemaillib.callback;
 
 /**
  * Created by zhengshaorui on 2018/6/12.

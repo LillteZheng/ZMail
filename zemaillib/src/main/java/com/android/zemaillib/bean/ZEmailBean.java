@@ -1,6 +1,7 @@
-package com.zhengsr.emaildemo.mail.bean;
+package com.android.zemaillib.bean;
 
-import com.zhengsr.emaildemo.mail.callback.IEmailSendListener;
+
+import com.android.zemaillib.callback.IEmailSendListener;
 
 /**
  * Created by zhengshaorui
@@ -16,5 +17,8 @@ public class ZEmailBean {
     public String[] toAddrs;
     public String[] filePaths;
     public String url;
+    public String host = null;
+    public String port = null;
+    public boolean isSSLverify = true;
     public IEmailSendListener listener;
 }

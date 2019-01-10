@@ -6,15 +6,17 @@ import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
+import com.android.zemaillib.ZMailManager;
+import com.android.zemaillib.callback.IEmailSendListener;
 import com.leeiidesu.permission.PermissionHelper;
-import com.zhengsr.emaildemo.mail.ZMailManager;
-import com.zhengsr.emaildemo.mail.callback.IEmailSendListener;
+
 
 public class MainActivity extends AppCompatActivity implements IEmailSendListener {
     private static final String TAG = "MainActivity";
-    private static final String SEND_EMAIL = "xxx@163.com";
-    private static final String TO_EMAIL = "x@163.com";
-    private static final String PASSWORD = "xxx";
+    private static final String SEND_EMAIL = "zhengsr123@gmail.com";
+    private static final String TO_EMAIL = "15919916744@163.com";
+    private static final String PASSWORD = "17320220zsrzsr";
+    private static final String HOST = "smtp.163.com";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,17 +28,19 @@ public class MainActivity extends AppCompatActivity implements IEmailSendListene
                 .request();
         String path = Environment.getExternalStorageDirectory().getAbsolutePath();
         String imageUrl = "http://img.my.csdn.net/uploads/201309/01/1378037235_7476.jpg";
-        String[] files = new String[]{path+"/test1.ppng",path+"/test2.png"};
+        String[] files = new String[]{"/storage/emulated/0/com.ist.whiteBoard/2018_12_25_Writeborad.zip"};
         //发送邮件
-        ZMailManager.fromAddr(SEND_EMAIL)    //your email
-                .nickName("会散步的鱼")       //昵称
-                .password(PASSWORD)         //授权码
-                .subject("测试邮件")         //主题
-                .content("这是一封测试邮件!") //内容
-                .file(imageUrl)             //附件，服务器
-                .file(files)                //附件，本地
-                .toAddrs(new String[]{TO_EMAIL}) //收件人，可以多个
-                .listener(this)                  //监听
+
+        String imagePath = "/mnt/usb/019A-6166/test.zip";
+        ZMailManager.fromAddr(SEND_EMAIL)
+                .nickName("会散步的鱼")
+                .password(PASSWORD)
+                .subject("测试邮件")
+                .content("这是一封测试邮件!")
+                .file(imageUrl)
+               // .file(new String[]{imagePath})
+                .toAddrs(new String[]{TO_EMAIL})
+                .listener(this)
                 .send();
 
     }
@@ -48,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements IEmailSendListene
 
     @Override
     public void sendFailed(String errorMsg) {
-        Log.d(TAG, "zsr --> sendFailed: ");
+        Log.d(TAG, "zsr --> sendFailed: "+errorMsg);
     }
 
     @Override

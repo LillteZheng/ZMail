@@ -1,9 +1,10 @@
-package com.zhengsr.emaildemo.mail;
+package com.android.zemaillib;
 
 import android.os.AsyncTask;
 import android.text.TextUtils;
+import android.util.Log;
 
-import com.zhengsr.emaildemo.mail.bean.ZEmailBean;
+import com.android.zemaillib.bean.ZEmailBean;
 
 import java.net.URL;
 import java.util.Date;
@@ -55,19 +56,41 @@ public class ZemailRequest {
         @Override
         protected Boolean doInBackground(Void... voids) {
             try {
-
-                String host = new StringBuilder().append("smtp.")
-                        .append(bean.fromAddr.split("\\@")[1].split("\\.")[0])
-                        .append(".com").toString();
+                String host ;
+                if (!TextUtils.isEmpty(bean.host)){
+                    host = bean.host;
+                }else {
+                    host = new StringBuilder().append("smtp.")
+                            .append(bean.fromAddr.split("\\@")[1].split("\\.")[0])
+                            .append(".com").toString();
+                }
+                String port ;
+                if (!TextUtils.isEmpty(bean.port)){
+                    port = bean.port;
+                }else{
+                    if (bean.isSSLverify) {
+                        port = "465";
+                    }else{
+                        port = "25";
+                    }
+                }
+                Log.d(TAG, "zsr --> doInBackground: "+bean.isSSLverify+" "+host+" "+port);
                 Properties props = new Properties();
                 props.put("mail.smtp.host", host);
-                props.put("mail.smtp.socketFactory.port", "465");
-                props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-                props.put("mail.smtp.auth", "true");
-                props.put("mail.smtp.port", "465");
+                if (bean.isSSLverify) {
+                    props.put("mail.smtp.socketFactory.port", port);
+                    props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+                    props.put("mail.smtp.auth", "true");
+                    props.put("mail.smtp.port", port);
+                }
 
-                Session session = Session.getInstance(props,
-                        new MailAuthenticator(bean.fromAddr,bean.password));
+                Session session ;
+                if(bean.isSSLverify){
+                    session = Session.getInstance(props,
+                            new MailAuthenticator(bean.fromAddr,bean.password));
+                }else{
+                    session = Session.getInstance(props,null);
+                }
                 MimeMessage mimeMessage = new MimeMessage(session);
                 session.setDebug(true);
                 //设置发送地址
@@ -116,10 +139,8 @@ public class ZemailRequest {
                 mimeMessage.setSubject(bean.subject);
                 mimeMessage.setSentDate(new Date());
                 mimeMessage.setContent(multipart);
-                Transport transport = session.getTransport("smtp");
-                transport.connect(host,bean.fromAddr,bean.password);
-                transport.sendMessage(mimeMessage,mimeMessage.getAllRecipients());
-              //  Transport.send(mimeMessage, bean.fromAddr, bean.password);
+
+                Transport.send(mimeMessage,bean.fromAddr,bean.password);
             } catch (Exception e) {
                 e.printStackTrace();
                 errorMsg = e.toString();

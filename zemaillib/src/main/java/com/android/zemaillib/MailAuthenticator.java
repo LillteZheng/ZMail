@@ -1,4 +1,5 @@
-package com.zhengsr.emaildemo.mail;
+package com.android.zemaillib;
+
 
 import javax.mail.PasswordAuthentication;
 
