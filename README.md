@@ -53,3 +53,15 @@ ZMailManager
 
 Gmail 比较蛋疼，申请了授权码之后，需要允许应用权限低的才能访问，但还是会被阻止，需要手动去确实是自己的登录行为。
 错误提示有，自己去研究了。。。
+
+混淆看这里，感谢 @xingstarx ：
+```
+-keep class javax.mail.** {*;}
+-keep class javax.activation.** {*;}
+-keep class com.android.zemaillib.** {*;}
+-keep class com.sun.mail.** {*;}
+-keep class com.sun.activation.registries.** {*;}
+-dontwarn java.awt.**
+-dontwarn javax.activation.**
+```
+如果对默认test 不喜欢，建议下载下来自己修改；笔者最近比较忙，后面会抽时间再优化一下。
