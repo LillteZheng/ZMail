@@ -19,7 +19,7 @@ allprojects {
 }
 ```
 ```
-implementation 'com.github.LillteZheng:ZMail:V1.0'
+implementation 'com.github.LillteZheng:ZMail:V1.1'
 ```
 ZMailManager 代码非常简单：
 ```
