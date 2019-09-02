@@ -64,4 +64,4 @@ Gmail 比较蛋疼，申请了授权码之后，需要允许应用权限低的�
 -dontwarn java.awt.**
 -dontwarn javax.activation.**
 ```
-如果对默认test 不喜欢，建议下载下来自己修改；笔者最近比较忙，后面会抽时间再优化一下。
+
