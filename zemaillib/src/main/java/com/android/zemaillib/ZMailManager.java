@@ -102,15 +102,7 @@ public class ZMailManager {
                 if (bean.toAddrs == null || bean.toAddrs.length == 0) {
                     throw new NullPointerException("toAddrs cannot be null !");
                 }
-                if (TextUtils.isEmpty(bean.subject)) {
-                    bean.subject = "TEST";
-                }
-                if (TextUtils.isEmpty(bean.content)) {
-                    bean.subject = "This is test email ";
-                }
-                if (TextUtils.isEmpty(bean.nickName)) {
-                    bean.nickName = "test";
-                }
+
             }
             return bean;
 
