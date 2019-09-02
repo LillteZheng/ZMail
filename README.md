@@ -25,13 +25,13 @@ ZMailManager 代码非常简单：
 ```
  /**
  * fromAddr       -- 发送人邮箱，不填报错
- * nickName       -- 发送人的昵称，不写则默认为 test
+ * nickName       -- 发送人的昵称，不写则默认为邮箱名
  * password       -- 授权码，不填报错，gmail 记得允许权限低的应用可以访问的权限
  * host           -- 配置 host 服务地址，默认根据发件人的邮箱来，比如 xx@qq.com ,则 host 为 smtp.qq.com
  * isSSLvertify   -- 是否开启SSL验证，默认开启，开启是端口为465，不开启则为25，建议开启，很多邮箱都需要验证 SSL的
  * port           -- 根据isSSLvertify，开启是端口为465，不开启则为25，也支持自定义
- * subject        -- 邮件主题，不写默认 TEST
- * content        -- 邮件内容，不写默认 This is a test email
+ * subject        -- 邮件主题
+ * content        -- 邮件内容
  * file           -- 支持 url 和 本地文件，可多个
  * toAddrs        -- 收件人，多个多个，必填，不填报错
  */
